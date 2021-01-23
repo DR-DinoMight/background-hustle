@@ -24,7 +24,7 @@ console.log('Ready!');
 
 });
 client.once('reconnecting', () => {
-console.log('Reconnecting!');
+    console.log('Reconnecting!');
 });
 client.once('disconnect', () => {
     console.log('Disconnect!');
@@ -49,16 +49,16 @@ client.on('message', async message => {
 
 function skip(message) {
     currentQueue.shift();
-    play(message, currentQueue);
+    play(message);
 }
 
-function play(message, queue) {
+function play(message) {
     console.log(currentQueue);
     if (currentQueue.length > 0){
-        message.channel.send(`Now Play: ${currentQueue[0].name}`)
-        let trackToPlay = currentQueue[0].type === 'local' ?  currentQueue[0].track : ytdl(currentQueue[0].track)
-
-        connection.play(trackToPlayk).on("finish", () => {
+        message.channel.send(`Now Playing: ${currentQueue[0].name}`)
+        console.log('currentQueue[0].type', currentQueue[0].type)
+        connection.play(currentQueue[0].type == 'youtube' ? ytdl(currentQueue[0].track) : currentQueue[0].track)
+            .on("finish", () => {
             console.log("finished");
             currentQueue.shift();
             return play(message,currentQueue);
