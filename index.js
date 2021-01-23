@@ -1,6 +1,8 @@
 
 const Discord = require('discord.js');
 const Playlist = require('./music/playlist.json');
+const ytdl = require("ytdl-core");
+
 const {
 	prefix,
 	token,
@@ -54,7 +56,9 @@ function play(message, queue) {
     console.log(currentQueue);
     if (currentQueue.length > 0){
         message.channel.send(`Now Play: ${currentQueue[0].name}`)
-        connection.play(currentQueue[0].track).on("finish", () => {
+        let trackToPlay = currentQueue[0].type === 'local' ?  currentQueue[0].track : ytdl(currentQueue[0].track)
+
+        connection.play(trackToPlayk).on("finish", () => {
             console.log("finished");
             currentQueue.shift();
             return play(message,currentQueue);

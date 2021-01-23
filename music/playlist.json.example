@@ -1,6 +1,7 @@
 [
     {
         "name": "Bird Ambience",
-        "track": "./music/Bird Ambience.mp3"
+        "track": "./music/Bird Ambience.mp3",
+        "type": "local" // or "youtube"
     }
 ]
