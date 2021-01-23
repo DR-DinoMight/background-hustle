@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+
+music/*.mp3
+music/playlist.json
+config.json
